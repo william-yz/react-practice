@@ -100,3 +100,13 @@ test('前一次投中10个，这一轮第一次投球打中8个： 状态由STRI
     expect(game.getScore()).toBe(10 + 16 + 2)
     expect(game.getRound()).toBe(3)
 })
+
+test('前一次投中10个，这一轮第一次投球打中10个： 状态由STRIKE变为STRIKE, 得分加20分,轮数+1', () => {
+    const game = new Game()
+    game.throw(10)
+    expect(game.getRound()).toBe(2)
+    expect(game.getState()).toBe(STRIKE)
+    game.throw(10)
+    expect(game.getState()).toBe(STRIKE)
+    expect(game.getScore()).toBe(10 + 20)
+})
