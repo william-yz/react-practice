@@ -1,0 +1,23 @@
+{
+  "name": "HongtooJetLab",
+  "version": "1.0.0",
+  "description": "***",
+  "main": "index.js",
+  "scripts": {
+    "test": "react-scripts test --env=jsdom"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.ht.com:WFDEV/HongtooJetLab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "react-scripts": "^0.9.0"
+  }
+}
