@@ -34,8 +34,13 @@ export const FSM = {
         // },
         fromOnceToOnce (pins) {
             this.score += pins
-            this.scoreboard[this.round - 1] = pins
-            this.state = NONE
+            this.scoreboard[this.round - 1] += pins
+            const currentRountScore = this.scoreboard[this.round - 1]
+            if (currentRountScore === 10) {
+                this.state = SRARE
+            } else {
+                this.state = NONE
+            }
         }
     }
 }
@@ -44,7 +49,7 @@ export default class Game {
 
     constructor () {
         this.score = 0
-        this.scoreboard = []
+        this.scoreboard = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         this.round = 1
         this.state = NONE
         this.FSM = FSM
