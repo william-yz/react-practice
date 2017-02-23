@@ -41,6 +41,7 @@ export const FSM = {
             } else {
                 this.state = NONE
             }
+            this.round ++
         }
     }
 }

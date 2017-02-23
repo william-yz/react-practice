@@ -29,15 +29,18 @@ test('前一次没有投中，第一次投球打中8个：状态由NONE变为ONC
     expect(currScore - prevScore).toBe(1)
 })
 
-test('前一次没有投中，第一次投球打中8个：状态由NONE变为ONCE, 得分加8分; 第二次投中2个: 状态由ONCE变为SRARE, 得分加2分', () => {
+test('前一次没有投中，第一次投球打中8个：状态由NONE变为ONCE, 得分加8分; 第二次投中2个: 状态由ONCE变为SRARE, 得分加2分, 局数+1', () => {
     const game = new Game()
+    const prevRound = game.getRound()
     game.throw(8)
     const prevScore = game.getScore()
     expect(game.getState()).toBe(ONCE)
     game.throw(2)
     const currScore = game.getScore()
+    const currentRound = game.getRound()
     expect(game.getState()).toBe(SRARE)
     expect(currScore - prevScore).toBe(2)
+    expect(currentRound - prevRound).toBe(1)
 })
 
 test('前一次没有投中，第一次投球打中10个： 状态由NONE变为STRIKE, 得分加10分', () => {
