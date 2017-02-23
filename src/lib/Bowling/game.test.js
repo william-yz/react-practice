@@ -86,3 +86,17 @@ test('前一次投中10个，这一轮第一次投球打中8个： 状态由STRI
     expect(game.getScore()).toBe(10 + 16 + 4)
     expect(game.getRound()).toBe(3)
 })
+
+test('前一次投中10个，这一轮第一次投球打中8个： 状态由STRIKE变为ONCE, 得分加16分； 第二次投中1个， 状态由ONCE变为NONE, 得分再加2分,轮数+1', () => {
+    const game = new Game()
+    game.throw(10)
+    expect(game.getRound()).toBe(2)
+    expect(game.getState()).toBe(STRIKE)
+    game.throw(8)
+    expect(game.getState()).toBe(ONCE)
+    expect(game.getScore()).toBe(10 + 16)
+    game.throw(1)
+    expect(game.getState()).toBe(NONE)
+    expect(game.getScore()).toBe(10 + 16 + 2)
+    expect(game.getRound()).toBe(3)
+})
