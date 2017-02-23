@@ -6,7 +6,7 @@ test('投一球，击中5个球，得到5分', () => {
 
     game.throw(5)
 
-    const result = game.getScore(5)
+    const result = game.getScore()
 
     expect(result).toEqual(expected)
 })

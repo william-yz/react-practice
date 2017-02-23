@@ -1,13 +1,13 @@
 import { add, substract } from './sample'
 
-test('add function should add two params', () => {
+test('5 + 5 = 10', () => {
     const expected = 10
     const result = add(5, 5);
 
     expect(result).toEqual(expected)
 })
 
-test('substract function should substract param one from param two', () => {
+test('15 - 5 = 10', () => {
     const expected = 10
     const result = substract(15, 5);
 
