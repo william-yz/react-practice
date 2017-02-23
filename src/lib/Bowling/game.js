@@ -1,7 +1,8 @@
 export class Game {
 
-    constructor = () => {
+    constructor () {
         this.score = 0
+        this.round = 1
     }
 
     throw = (pins) => {
@@ -10,5 +11,9 @@ export class Game {
 
     getScore = () => {
         return this.score
+    }
+
+    getRound = () => {
+        return this.round
     }
 }
