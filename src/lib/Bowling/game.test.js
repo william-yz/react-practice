@@ -1,10 +1,11 @@
-import { Game } from './game'
+import Game, { NONE, STRIKE, SRARE } from './game'
 
-test('开局有0分，是第一轮', () => {
+test('开局有0分，是第一轮, 状态是上一轮没有中', () => {
     const game = new Game()
 
     expect(game.getScore()).toBe(0)
     expect(game.getRound()).toBe(1)
+    expect(game.getState()).toBe(NONE)
 })
 
 test('投一球，击中5个球，得到5分', () => {
