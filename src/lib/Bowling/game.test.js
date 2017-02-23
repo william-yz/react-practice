@@ -1,15 +1,18 @@
 import Game, { NONE, STRIKE, SRARE, ONCE } from './game'
 
-test('开局有0分，是第一轮, 状态是上一轮没有中', () => {
-    const game = new Game()
+let game
 
+beforeEach(() => {
+    game = new Game()
+})
+
+test('开局有0分，是第一轮, 状态是上一轮没有中', () => {
     expect(game.getScore()).toBe(0)
     expect(game.getRound()).toBe(1)
     expect(game.getState()).toBe(NONE)
 })
 
 test('前一轮没有投中，第一次投球打中8个： 状态由NONE变为ONCE, 得分加8分', () => {
-    const game = new Game()
     expect(game.getState()).toBe(NONE)
     const prevScore = game.getScore()
     game.throw(8)
@@ -19,7 +22,6 @@ test('前一轮没有投中，第一次投球打中8个： 状态由NONE变为ON
 })
 
 test('前一轮没有投中，第一次投球打中8个：状态由NONE变为ONCE, 得分加8分; 第二次投中1个: 状态由ONCE变为NONE, 得分加1分', () => {
-    const game = new Game()
     game.throw(8)
     const prevScore = game.getScore()
     expect(game.getState()).toBe(ONCE)
@@ -30,7 +32,6 @@ test('前一轮没有投中，第一次投球打中8个：状态由NONE变为ONC
 })
 
 test('前一轮没有投中，第一次投球打中8个：状态由NONE变为ONCE, 得分加8分; 第二次投中2个: 状态由ONCE变为SRARE, 得分加2分, 局数+1', () => {
-    const game = new Game()
     const prevRound = game.getRound()
     game.throw(8)
     const prevScore = game.getScore()
@@ -44,7 +45,6 @@ test('前一轮没有投中，第一次投球打中8个：状态由NONE变为ONC
 })
 
 test('前一轮没有投中，第一次投球打中10个： 状态由NONE变为STRIKE, 得分加10分，轮数+1', () => {
-    const game = new Game()
     expect(game.getState()).toBe(NONE)
     const prevScore = game.getScore()
     game.throw(10)
@@ -55,7 +55,6 @@ test('前一轮没有投中，第一次投球打中10个： 状态由NONE变为S
 })
 
 test('前一轮没有投中，第一次投球打中10个： 状态由NONE变为STRIKE, 得分加10分', () => {
-    const game = new Game()
     expect(game.getState()).toBe(NONE)
     const prevScore = game.getScore()
     game.throw(10)
@@ -65,7 +64,6 @@ test('前一轮没有投中，第一次投球打中10个： 状态由NONE变为S
 })
 
 test('前一轮一投投中10个，这一轮第一次投球打中8个： 状态由STRIKE变为ONCE, 得分加16分', () => {
-    const game = new Game()
     game.throw(10)
     expect(game.getState()).toBe(STRIKE)
     game.throw(8)
@@ -74,7 +72,6 @@ test('前一轮一投投中10个，这一轮第一次投球打中8个： 状态�
 })
 
 test('前一轮一投投中10个，这一轮第一次投球打中8个： 状态由STRIKE变为ONCE, 得分加16分； 第二次投中2个， 状态由ONCE变为SRARE, 得分再加4分,轮数+1', () => {
-    const game = new Game()
     game.throw(10)
     expect(game.getRound()).toBe(2)
     expect(game.getState()).toBe(STRIKE)
@@ -88,7 +85,6 @@ test('前一轮一投投中10个，这一轮第一次投球打中8个： 状态�
 })
 
 test('前一轮一投投中10个，这一轮第一次投球打中8个： 状态由STRIKE变为ONCE, 得分加16分； 第二次投中1个， 状态由ONCE变为NONE, 得分再加2分,轮数+1', () => {
-    const game = new Game()
     game.throw(10)
     expect(game.getRound()).toBe(2)
     expect(game.getState()).toBe(STRIKE)
@@ -102,7 +98,6 @@ test('前一轮一投投中10个，这一轮第一次投球打中8个： 状态�
 })
 
 test('前一轮一投投中10个，这一轮第一次投球打中10个： 状态由STRIKE变为STRIKE, 得分加20分,轮数+1', () => {
-    const game = new Game()
     game.throw(10)
     expect(game.getRound()).toBe(2)
     expect(game.getState()).toBe(STRIKE)
@@ -113,7 +108,6 @@ test('前一轮一投投中10个，这一轮第一次投球打中10个： 状态
 
 
 test('前一轮两投投中10个，这一轮第一次投球打中8个： 状态由SRARE变为ONCE, 得分加16分', () => {
-    const game = new Game()
     game.throw(2)
     game.throw(8)
     expect(game.getState()).toBe(SRARE)
@@ -123,7 +117,6 @@ test('前一轮两投投中10个，这一轮第一次投球打中8个： 状态�
 })
 
 test('前一轮两投投中10个，这一轮第一次投球打中8个： 状态由SRARE变为ONCE, 得分加16分； 第二次投中2个， 状态由ONCE变为SRARE, 得分再加2分,轮数+1', () => {
-    const game = new Game()
     game.throw(2)
     game.throw(8)
     expect(game.getRound()).toBe(2)
@@ -138,7 +131,6 @@ test('前一轮两投投中10个，这一轮第一次投球打中8个： 状态�
 })
 
 test('前一轮两投投中10个，这一轮第一次投球打中8个： 状态由SRARE变为ONCE, 得分加16分； 第二次投中1个， 状态由ONCE变为NONE, 得分再加1分,轮数+1', () => {
-    const game = new Game()
     game.throw(2)
     game.throw(8)
     expect(game.getRound()).toBe(2)
@@ -153,7 +145,6 @@ test('前一轮两投投中10个，这一轮第一次投球打中8个： 状态�
 })
 
 test('前一轮两投投中10个，这一轮第一次投球打中10个： 状态由SRARE变为STRIKE, 得分加20分,轮数+1', () => {
-    const game = new Game()
     game.throw(2)
     game.throw(8)
     expect(game.getRound()).toBe(2)
