@@ -49,9 +49,6 @@ export const FSM = {
         fromOnceToOnce (pins) {
             let currentRoundScore = this.addScore(pins)
             if (currentRoundScore === 10) {
-                if (this.round === 10) {
-                    this.state = ONCE
-                }
                 this.prevState = this.currRoundState
                 this.state = SRARE
                 this.round ++
@@ -115,17 +112,17 @@ export default class Game {
         // 再算上一轮的分数
         switch (this.state) {
             case NONE:
-                break;
+                break
             case SRARE:
             case STRIKE:
                 this.scoreboard[this.round - 2] += pins
-                break;
+                break
             case ONCE:
                 if (this.currRoundState === STRIKE) {
                     this.scoreboard[this.round - 2] += pins
                 }
             default:
-                break;
+                break
         }
     }
 
@@ -133,17 +130,16 @@ export default class Game {
         console.log(this.scoreboard)
     }
     calculateLastScore = (pins) => {
-        if (this.prevState === STRIKE) {
+        if (this.prevState === STRIKE && this.state === STRIKE) {
             this.scoreboard[this.round - 3] += pins
         }
     }
 
     addScore = (pins) => {
         this.scoreboard[this.round - 1] += pins
-
         this.calculatePrevScore(pins)
-        
         this.calculateLastScore(pins)
+        this.scoreboard = this.scoreboard.splice(0, 10)
         return this.scoreboard[this.round - 1]
     }
 
@@ -151,4 +147,3 @@ export default class Game {
 
     }
 }
-
