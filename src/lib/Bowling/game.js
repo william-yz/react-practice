@@ -12,15 +12,17 @@ export const FSM = {
     events: {
         fromNoneToOnce (pins) {
             this.score += pins
-            this.scoreboard[this.round - 1] = pins
+            this.scoreboard[this.round - 1] += pins
+            this.prevState = NONE
             this.state = ONCE
         },
         // fromOnceToSpare (pins) {
         // },
         fromNoneToStrike (pins) {
             this.score += pins
-            this.scoreboard[this.round - 1] = pins
+            this.scoreboard[this.round - 1] += pins
             this.state = STRIKE
+            this.round ++
         },
         // fromOnceToNone (pins) {
         // },
@@ -28,15 +30,34 @@ export const FSM = {
         // },
         // fromSrareToStrike (pins) {
         // },
-        // fromStrikeToOnce (pins) {
-        // },
+        fromStrikeToOnce (pins) {
+            this.score += pins * 2
+            this.scoreboard[this.round - 1] += pins
+            this.scoreboard[this.round - 2] += pins
+            this.prevState = STRIKE
+            this.state = ONCE
+        },
         // fromSrareToStrike (pins) {
         // },
+        // 第二次投球
         fromOnceToOnce (pins) {
-            this.score += pins
-            this.scoreboard[this.round - 1] += pins
-            const currentRountScore = this.scoreboard[this.round - 1]
-            if (currentRountScore === 10) {
+            let currentRoundScore
+            switch (this.prevState) {
+                case NONE:
+                    this.score += pins
+                    this.scoreboard[this.round - 1] += pins
+                    currentRoundScore = this.scoreboard[this.round - 1]
+                    break;
+                case STRIKE:
+                    this.score += pins * 2
+                    this.scoreboard[this.round - 1] += pins
+                    this.scoreboard[this.round - 2] += pins
+                    currentRoundScore = this.scoreboard[this.round - 1]
+                default:
+                    break;
+            }
+            
+            if (currentRoundScore === 10) {
                 this.state = SRARE
             } else {
                 this.state = NONE
