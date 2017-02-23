@@ -28,8 +28,13 @@ export const FSM = {
         // },
         // fromSrareToOnce (pins) {
         // },
-        // fromSrareToStrike (pins) {
-        // },
+        fromStrikeToStrike (pins) {
+            this.score += pins * 2
+            this.scoreboard[this.round - 1] += pins
+            this.scoreboard[this.round - 2] += pins
+            this.state = STRIKE
+            this.round ++
+        },
         fromStrikeToOnce (pins) {
             this.score += pins * 2
             this.scoreboard[this.round - 1] += pins
