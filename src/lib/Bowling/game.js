@@ -32,8 +32,11 @@ export const FSM = {
         // },
         // fromSrareToStrike (pins) {
         // },
-        // fromOnceToOnce () {
-        // }
+        fromOnceToOnce (pins) {
+            this.score += pins
+            this.scoreboard[this.round - 1] = pins
+            this.state = NONE
+        }
     }
 }
 
