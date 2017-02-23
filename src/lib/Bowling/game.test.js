@@ -1,4 +1,4 @@
-import Game, { NONE, STRIKE, SRARE } from './game'
+import Game, { NONE, STRIKE, SRARE, ONCE } from './game'
 
 test('开局有0分，是第一轮, 状态是上一轮没有中', () => {
     const game = new Game()
@@ -29,4 +29,14 @@ test('投一球，击中5个球，再投一球，击中5个球，得到10分', (
     const result = game.getScore()
 
     expect(result).toEqual(expected)
+})
+
+test('前一次没有投中，第一次投球打中8个： 状态由NONE表位ONCE, 得分加8分', () => {
+    const game = new Game()
+    expect(game.getState()).toBe(NONE)
+    const prevStore = game.getScore()
+    game.throw(8)
+    const currStore = game.getScore()
+    expect(game.getState()).toBe(ONCE)
+    expect(currStore - prevStore).toBe(8)
 })
