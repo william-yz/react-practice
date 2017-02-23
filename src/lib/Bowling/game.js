@@ -13,68 +13,41 @@ export const FSM = {
     init: NONE,
     events: {
         fromNoneToOnce (pins) {
-            this.score += pins
             this.addScore(pins)
             this.currRoundState = NONE
             this.state = ONCE
         },
         fromNoneToStrike (pins) {
-            this.score += pins
             this.addScore(pins)
             this.prevState = NONE
             this.state = STRIKE
             this.round ++
         },
         fromSrareToOnce (pins) {
-            this.score += pins * 2
             this.addScore(pins)
-            this.scoreboard[this.round - 2] += pins
             this.currRoundState = SRARE
             this.state = ONCE
         },
         fromStrikeToStrike (pins) {
-            this.score += pins * 2
             this.addScore(pins)
-            this.scoreboard[this.round - 2] += pins
             this.prevState = STRIKE
             this.state = STRIKE
             this.round ++
         },
         fromStrikeToOnce (pins) {
-            this.score += pins * 2
             this.addScore(pins)
-            this.scoreboard[this.round - 2] += pins
             this.currRoundState = STRIKE
             this.state = ONCE
         },
         fromSrareToStrike (pins) {
-            this.score += pins * 2
             this.addScore(pins)
-            this.scoreboard[this.round - 2] += pins
             this.prevState = SRARE
             this.state = STRIKE
             this.round ++
         },
         // 第二次投球
         fromOnceToOnce (pins) {
-            let currentRoundScore
-            switch (this.currRoundState) {
-                case NONE:
-                case SRARE:
-                    this.score += pins
-                    this.addScore(pins)
-                    currentRoundScore = this.scoreboard[this.round - 1]
-                    break;
-                case STRIKE:
-                    this.score += pins * 2
-                    this.addScore(pins)
-                    this.scoreboard[this.round - 2] += pins
-                    currentRoundScore = this.scoreboard[this.round - 1]
-                    break;
-                default:
-                    break;
-            }
-            
+            let currentRoundScore = this.addScore(pins)
             if (currentRoundScore === 10) {
                 if (this.round === 10) {
                     this.state = ONCE
@@ -98,7 +71,6 @@ export const FSM = {
 export default class Game {
 
     constructor () {
-        this.score = 0
         this.scoreboard = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         this.round = 1
         this.state = NONE
@@ -119,7 +91,7 @@ export default class Game {
     }
 
     getScore = () => {
-        return this.score
+        return this.scoreboard.reduce((prev, curr) => prev + curr)
     }
 
     getRound = () => {
@@ -138,9 +110,41 @@ export default class Game {
             throw new Error(`Can not change from ${this.state} to ${state}`)
         }
     }
+    
+    calculatePrevScore = (pins) => {
+        // 再算上一轮的分数
+        switch (this.state) {
+            case NONE:
+                break;
+            case SRARE:
+            case STRIKE:
+                this.scoreboard[this.round - 2] += pins
+                break;
+            case ONCE:
+                if (this.currRoundState === STRIKE) {
+                    this.scoreboard[this.round - 2] += pins
+                }
+            default:
+                break;
+        }
+    }
+
+    display = () => {
+        console.log(this.scoreboard)
+    }
+    calculateLastScore = (pins) => {
+        if (this.prevState === STRIKE) {
+            this.scoreboard[this.round - 3] += pins
+        }
+    }
 
     addScore = (pins) => {
         this.scoreboard[this.round - 1] += pins
+
+        this.calculatePrevScore(pins)
+        
+        this.calculateLastScore(pins)
+        return this.scoreboard[this.round - 1]
     }
 
     addToPrevScoreboard = () => {
