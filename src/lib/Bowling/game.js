@@ -26,8 +26,13 @@ export const FSM = {
         },
         // fromOnceToNone (pins) {
         // },
-        // fromSrareToOnce (pins) {
-        // },
+        fromSrareToOnce (pins) {
+            this.score += pins * 2
+            this.scoreboard[this.round - 1] += pins
+            this.scoreboard[this.round - 2] += pins
+            this.prevState = SRARE
+            this.state = ONCE
+        },
         fromStrikeToStrike (pins) {
             this.score += pins * 2
             this.scoreboard[this.round - 1] += pins
@@ -42,13 +47,19 @@ export const FSM = {
             this.prevState = STRIKE
             this.state = ONCE
         },
-        // fromSrareToStrike (pins) {
-        // },
+        fromSrareToStrike (pins) {
+            this.score += pins * 2
+            this.scoreboard[this.round - 1] += pins
+            this.scoreboard[this.round - 2] += pins
+            this.state = STRIKE
+            this.round ++
+        },
         // 第二次投球
         fromOnceToOnce (pins) {
             let currentRoundScore
             switch (this.prevState) {
                 case NONE:
+                case SRARE:
                     this.score += pins
                     this.scoreboard[this.round - 1] += pins
                     currentRoundScore = this.scoreboard[this.round - 1]
