@@ -1,14 +1,14 @@
 export class Game {
 
-    constructor = () => {
+    constructor(){
         this.score = 0
     }
 
-    throw = (pins) => {
+    throw(pins){
         this.score += pins
     }
 
-    getScore = () => {
+    getScore(){
         return this.score
     }
 }

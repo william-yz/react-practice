@@ -12,7 +12,7 @@ test('投一球，击中5个球，得到5分', () => {
 })
 
 test('投一球，击中5个球，再投一球，击中5个球，得到10分', () => {
-    const expected = 5
+    const expected = 10
     const game = new Game()
 
     game.throw(5)
