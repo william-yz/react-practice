@@ -8,30 +8,7 @@ test('开局有0分，是第一轮, 状态是上一轮没有中', () => {
     expect(game.getState()).toBe(NONE)
 })
 
-test('投一球，击中5个球，得到5分', () => {
-    const expected = 5
-    const game = new Game()
-
-    game.throw(5)
-
-    const result = game.getScore(5)
-
-    expect(result).toEqual(expected)
-})
-
-test('投一球，击中5个球，再投一球，击中5个球，得到10分', () => {
-    const expected = 10
-    const game = new Game()
-
-    game.throw(5)
-    game.throw(5)
-
-    const result = game.getScore()
-
-    expect(result).toEqual(expected)
-})
-
-test('前一次没有投中，第一次投球打中8个： 状态由NONE表位ONCE, 得分加8分', () => {
+test('前一次没有投中，第一次投球打中8个： 状态由NONE变为ONCE, 得分加8分', () => {
     const game = new Game()
     expect(game.getState()).toBe(NONE)
     const prevStore = game.getScore()
@@ -39,4 +16,14 @@ test('前一次没有投中，第一次投球打中8个： 状态由NONE表位ON
     const currStore = game.getScore()
     expect(game.getState()).toBe(ONCE)
     expect(currStore - prevStore).toBe(8)
+})
+
+test('前一次没有投中，第一次投球打中10个： 状态由NONE变为STRIKE, 得分加10分', () => {
+    const game = new Game()
+    expect(game.getState()).toBe(NONE)
+    const prevStore = game.getScore()
+    game.throw(10)
+    const currStore = game.getScore()
+    expect(game.getState()).toBe(STRIKE)
+    expect(currStore - prevStore).toBe(10)
 })

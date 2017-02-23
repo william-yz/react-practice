@@ -10,24 +10,30 @@ export const ONCE = 'Once'
 export const FSM = {
     init: NONE,
     events: {
-        fromNoneToOnce () {
+        fromNoneToOnce (pins) {
+            this.score += pins
+            this.scoreboard[this.round - 1] = pins
+            this.state = ONCE
         },
-        fromOnceToSpare () {
+        // fromOnceToSpare (pins) {
+        // },
+        fromNoneToStrike (pins) {
+            this.score += pins
+            this.scoreboard[this.round - 1] = pins
+            this.state = STRIKE
         },
-        fromNoneToStrike () {
-        },
-        fromOnceToNone () {
-        },
-        fromNoneToOnce () {
-        },
-        fromNoneToStrike () {
-        },
-        fromStrikeToOnce () {
-        },
-        fromSrareToStrike () {
-        },
-        fromOnceToOnce () {
-        }
+        // fromOnceToNone (pins) {
+        // },
+        // fromSrareToOnce (pins) {
+        // },
+        // fromSrareToStrike (pins) {
+        // },
+        // fromStrikeToOnce (pins) {
+        // },
+        // fromSrareToStrike (pins) {
+        // },
+        // fromOnceToOnce () {
+        // }
     }
 }
 
@@ -35,18 +41,19 @@ export default class Game {
 
     constructor () {
         this.score = 0
+        this.scoreboard = []
         this.round = 1
         this.state = NONE
         this.FSM = FSM
+        this.prevState = NONE
     }
 
     throw = (pins) => {
         if (pins === 10) {
-            this.setState(STRIKE)
+            this.setState(STRIKE, pins)
         } else {
-            this.setState(ONCE)
+            this.setState(ONCE, pins)
         }
-        this.score += pins
     }
 
     getScore = () => {
@@ -61,10 +68,10 @@ export default class Game {
         return this.state
     }
 
-    setState = (state) => {
+    setState = (state, pins = 0) => {
         const handler = this.FSM.events[`from${this.state}To${state}`]
         if (handler) {
-            handler.call(this)
+            handler.call(this, pins)
         } else {
             throw new Error(`Can not change from ${this.state} to ${state}`)
         }
