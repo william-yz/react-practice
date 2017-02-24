@@ -13,41 +13,34 @@ export const FSM = {
     init: NONE,
     events: {
         fromNoneToOnce (pins) {
-            this.addScore(pins)
             this.currRoundState = NONE
             this.state = ONCE
         },
         fromNoneToStrike (pins) {
-            this.addScore(pins)
             this.prevState = NONE
             this.state = STRIKE
             this.round ++
         },
         fromSrareToOnce (pins) {
-            this.addScore(pins)
             this.currRoundState = SRARE
             this.state = ONCE
         },
         fromStrikeToStrike (pins) {
-            this.addScore(pins)
             this.prevState = STRIKE
             this.state = STRIKE
             this.round ++
         },
         fromStrikeToOnce (pins) {
-            this.addScore(pins)
             this.currRoundState = STRIKE
             this.state = ONCE
         },
         fromSrareToStrike (pins) {
-            this.addScore(pins)
             this.prevState = SRARE
             this.state = STRIKE
             this.round ++
         },
         // 第二次投球
-        fromOnceToOnce (pins) {
-            let currentRoundScore = this.addScore(pins)
+        fromOnceToOnce (currentRoundScore) {
             if (currentRoundScore === 10) {
                 this.prevState = this.currRoundState
                 this.state = SRARE
@@ -102,7 +95,8 @@ export default class Game {
     setState = (state, pins = 0) => {
         const handler = this.FSM.events[`from${this.state}To${state}`]
         if (handler) {
-            handler.call(this, pins)
+            let currentRoundScore = this.addScore(pins)
+            handler.call(this, currentRoundScore)
         } else {
             throw new Error(`Can not change from ${this.state} to ${state}`)
         }
@@ -113,10 +107,12 @@ export default class Game {
         switch (this.state) {
             case NONE:
                 break
+            // 如果是第一次投,且上一投是SPARE或者是STRIKE,就把分数加到上一投中
             case SRARE:
             case STRIKE:
                 this.scoreboard[this.round - 2] += pins
                 break
+            // 如果是第二次投,且上一投是STRIKE,才把分数加到上一投中
             case ONCE:
                 if (this.currRoundState === STRIKE) {
                     this.scoreboard[this.round - 2] += pins
@@ -126,20 +122,22 @@ export default class Game {
         }
     }
 
-    display = () => {
-        console.log(this.scoreboard)
-    }
     calculateLastScore = (pins) => {
+        // 上上一投是STRIKE,上一投也是STRIKE,就要把这次投加到上上投中
         if (this.prevState === STRIKE && this.state === STRIKE) {
             this.scoreboard[this.round - 3] += pins
         }
+    }
+
+    display = () => {
+        console.log(this.scoreboard)
     }
 
     addScore = (pins) => {
         this.scoreboard[this.round - 1] += pins
         this.calculatePrevScore(pins)
         this.calculateLastScore(pins)
-        this.scoreboard = this.scoreboard.splice(0, 10)
+        this.scoreboard = this.scoreboard.slice(0, 10)
         return this.scoreboard[this.round - 1]
     }
 
