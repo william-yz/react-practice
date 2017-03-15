@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import Todo from './Todo'
 import Actions from './Actions'
 
-import { getTodoList, saveTodo, removeTodo, toggleComplate } from '../actionCreators'
 const style = {
   width: '300px'
 }
@@ -19,10 +18,10 @@ class TodoList extends React.Component {
     })
   }
   removeTodo = todo => () => {
-    this.props.dispatch(removeTodo(todo))
+    this.props.dispatch({type: 'REMOVE_TODO', payload: todo})
   }
   save = todo => () => {
-    this.props.dispatch(saveTodo(todo))
+    this.props.dispatch({type: 'SAVE_TODO', payload: todo})
   }
   edit = todo => () => {
     this.props.dispatch({
@@ -39,11 +38,11 @@ class TodoList extends React.Component {
   }
 
   complate = todo => () => {
-    this.props.dispatch(toggleComplate((todo)))
+    this.props.dispatch({type: 'TOGGLE_COMPLATE', payload: todo})
   }
 
   componentDidMount = () => {
-    this.props.dispatch(getTodoList())
+    this.props.dispatch({type: 'LOAD_TODOS'})
   }
 
   render () {
