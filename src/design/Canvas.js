@@ -1,5 +1,6 @@
 import React from 'react'
-import { Row, Col, Card } from 'antd'
+import { Row, Col, Card, Button } from 'antd'
+import {SortableContainer, SortableElement} from 'react-sortable-hoc'
 
 import componentRender from './componentRender'
 
@@ -12,7 +13,35 @@ const autoLayout = (span) => {
     xl: 6 * span
   }
 }
-export default function Canvas ({ components, addComponent, changeCurrentComponent, currentComponentIndex }) {
+
+const SortableItem = SortableElement(({component, componentIndex, changeCurrentComponent, currentComponentIndex}) =>
+  <Col 
+    {...autoLayout(component.span)}
+    onClick={changeCurrentComponent(componentIndex)}
+    style={{backgroundColor: currentComponentIndex === componentIndex ? '#EEEEEE' : 'white'}}
+    >
+    
+    {componentRender(component)}
+  </Col>
+)
+
+const SortableList = SortableContainer(({components, changeCurrentComponent, currentComponentIndex }) => {
+  return (
+    <Row gutter={24}>
+      {
+        components.map((component, index) => (
+          <SortableItem
+            component={component}
+            componentIndex={index}
+            index={index}
+            key={index}
+            changeCurrentComponent={changeCurrentComponent}
+            currentComponentIndex={currentComponentIndex}/>
+        ))
+      }
+    </Row>)
+})
+export default function Canvas ({ components, addComponent, changeCurrentComponent, currentComponentIndex, save, preview, onSortEnd }) {
   const ondrop = (event) => {
     const type = event.dataTransfer.getData('type')
     addComponent(type)
@@ -23,19 +52,14 @@ export default function Canvas ({ components, addComponent, changeCurrentCompone
       style={{height: '800px'}}
       onDragOver={e => e.preventDefault()}
       onDrop={ondrop}
+      extra={(<div><Button onClick={save}>Save</Button><Button onClick={preview}>Preview</Button></div>)}
       >
-      <Row gutter={24}>
-          {components.map((component, index) => (
-            <Col 
-              {...autoLayout(component.span)}
-              key={index}
-              onClick={changeCurrentComponent(index)}
-              style={{backgroundColor: currentComponentIndex === index ? '#EEEEEE' : 'white'}}
-              >
-              {componentRender(component)}
-            </Col>
-          ))}
-      </Row>
+      <SortableList
+        components={components}
+        changeCurrentComponent={changeCurrentComponent}
+        currentComponentIndex={currentComponentIndex}
+        axis="xy"
+        onSortEnd={onSortEnd}/>
     </Card>
   )
 }
