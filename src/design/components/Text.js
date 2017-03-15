@@ -1,7 +1,6 @@
 import React from 'react'
-import { Input, Row } from 'antd'
+import { Input } from 'antd'
 
-const style = {}
 
 export default function Text ({ label }) {
   return (
