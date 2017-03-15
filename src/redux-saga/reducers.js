@@ -9,32 +9,27 @@ const g = (function* () {
 const nextId = () => g.next().value
 
 const reducers = {
+  'RECEIVE_TODOS': (state, todos) => {
+    return {
+      ...state,
+      todos: todos.map((todo, index) => {
+        return {...todos[index], editting: false}
+      })
+    }
+  },
   'ADD_TODO': (state, { content }) => {
     return {
-        todos: [...state.todos, {
-            id: nextId(),
-            content: content,
-            editting: true,
-            complated: false
-          }]}
-  },
-  'SAVE_TODO': (state, { id, content }) => {
-    return {
-        todos: state.todos.map(todo => {
-          if (todo.id === id) {
-            return {...todo, editting: false}
-          } else {
-            return todo
-          }
-        })}
-  },
-  'REMOVE_TODO': (state, { id }) => {
-    return {
-      todos: state.todos.filter(todo => todo.id !== id)
-    }
+      ...state,
+      todos: [...state.todos, {
+          id: 'temp-' + nextId(),
+          content: content,
+          editting: true,
+          complated: false
+        }]}
   },
   'INPUTTING_TODO': (state, { id, content }) => {
     return {
+      ...state,
       todos: state.todos.map(todo => {
         if (todo.id === id) {
           return {...todo, content}
@@ -45,6 +40,7 @@ const reducers = {
   },
   'EDIT_TODO': (state, { id }) => {
     return {
+      ...state,
       todos: state.todos.map(todo => {
         if (todo.id === id) {
           return {...todo, editting: true}
@@ -53,31 +49,24 @@ const reducers = {
         }
       })}
   },
-  'COMPLATE_TODO': (state, { id }) => {
+  'START_LOADING': (state) => {
     return {
-      todos: state.todos.map(todo => {
-        if (todo.id === id) {
-          return {...todo, complated: true}
-        } else {
-          return todo
-        }
-      })}
+      ...state,
+      loading: true
+    }
   },
-  'INCOMPLATE_TODO': (state, { id }) => {
+  'STOP_LOADING': (state) => {
     return {
-      todos: state.todos.map(todo => {
-        if (todo.id === id) {
-          return {...todo, complated: false}
-        } else {
-          return todo
-        }
-      })}
+      ...state,
+      loading: false
+    }
   }
 }
 
 
 export default (state = {
-  todos: []
+  todos: [],
+  loading: false
 }, {type, payload}) => {
   return reducers[type] ? reducers[type](state, payload) : state
 }

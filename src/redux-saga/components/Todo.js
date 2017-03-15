@@ -3,7 +3,7 @@ import React from 'react'
 import { Input, Icon } from 'antd'
 import './Todo.css'
 
-export default ({ save, edit, input, removeTodo, editting, content, complated }) => {
+export default ({ save, edit, input, removeTodo, editting, content, complated, otherIsEditting }) => {
   return (
     <div className="editable-cell">
       { 
@@ -23,7 +23,7 @@ export default ({ save, edit, input, removeTodo, editting, content, complated })
         <div className="editable-cell-input-wrapper" style={{textDecoration: complated ? 'line-through' : 'none'}}>
           {content}
           {
-            !complated && (
+            (!complated && !otherIsEditting) && (
               <span>
                 <Icon
                   type="edit"

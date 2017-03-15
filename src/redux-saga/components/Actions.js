@@ -2,8 +2,8 @@ import React from 'react'
 
 import { Button } from 'antd'
 
-export default ({ addTodo }) => {
+export default ({ addTodo, someoneIsEditting }) => {
   return (
-    <Button type="primary" onClick={addTodo} >Add</Button>
+    <Button type="primary" disabled={someoneIsEditting} onClick={addTodo} >Add</Button>
   )
 }

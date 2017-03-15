@@ -1,16 +1,23 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-import { Card } from 'antd'
+import { Card, Spin } from 'antd'
 import TodoList from './components/TodoList'
 
-const App = () => {
+const App = ({loading}) => {
   
   return (
     <Card
       title="Todo List">
-      <TodoList />
+      <Spin spinning={loading} >
+        <TodoList />
+      </Spin>
     </Card>
   )
 }
 
-export default App
+export default connect(({loading}) => {
+  return {
+    loading
+  }
+})(App)
