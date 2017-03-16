@@ -24,7 +24,8 @@ const reducers = {
           id: 'temp-' + nextId(),
           content: content,
           editting: true,
-          complated: false
+          complated: false,
+          deleted: false
         }]}
   },
   'INPUTTING_TODO': (state, { id, content }) => {

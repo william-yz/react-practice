@@ -2,8 +2,12 @@ import React from 'react'
 
 import { Button } from 'antd'
 
-export default ({ addTodo, someoneIsEditting }) => {
+export default ({ addTodo, redo, someoneIsEditting, redoabled }) => {
   return (
-    <Button type="primary" disabled={someoneIsEditting} onClick={addTodo} >Add</Button>
+    <span>
+      <Button type="primary" disabled={someoneIsEditting} onClick={addTodo} >Add</Button>
+      &nbsp;
+      <Button type="primary" disabled={someoneIsEditting || !redoabled} onClick={redo} >Redo</Button>
+    </span>
   )
 }

@@ -41,6 +41,9 @@ class TodoList extends React.Component {
     this.props.dispatch({type: 'TOGGLE_COMPLATE', payload: todo})
   }
 
+  redo = () => {
+    this.props.dispatch({type: 'REDO_REMOVE'})
+  }
   componentDidMount = () => {
     this.props.dispatch({type: 'LOAD_TODOS'})
   }
@@ -49,7 +52,7 @@ class TodoList extends React.Component {
     return (
       <div>
         <Timeline>
-          {this.props.todos.map((todo, index) => (
+          {this.props.todos.filter(todo => !todo.deleted).map((todo, index) => (
             <Timeline.Item
               key={todo.id}
               style={style}
@@ -60,10 +63,15 @@ class TodoList extends React.Component {
             </Timeline.Item>
             ))}
         </Timeline>
-        <Actions someoneIsEditting={this.props.someoneIsEditting}  addTodo={this.addTodo.bind(this,{
-          content: '',
-          editting: true
-        })}/>
+        <Actions
+          someoneIsEditting={this.props.someoneIsEditting}
+          redoabled={this.props.todos.some(todo => todo.deleted)}
+          addTodo={this.addTodo.bind(this,{
+            content: '',
+            editting: true
+          })}
+          redo={this.redo}
+          />
       </div>
     )
   }

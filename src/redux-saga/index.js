@@ -15,7 +15,7 @@ import App from './App'
 const store = createStore(reducers,
   applyMiddleware(thunk, sagaMiddleware, createLogger()))
 
-sagaMiddleware.run(sagas)
+sagaMiddleware.run(sagas, store.getState)
 const Saga = () => (
   <Provider store={store}>
     <App />
