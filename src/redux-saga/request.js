@@ -3,10 +3,13 @@ const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
 const uid = (i = 8, result = '') => 
   i > 0 ? uid(i - 1, result + c[Math.floor(Math.random() * c.length)]) : result
 
-const getTodoFromLocalStorage = () => {
+export const getTodoFromLocalStorage = () => {
   return JSON.parse(window.localStorage.getItem('todo-list')) || []
 }
 
+const setTodoToLocalStorage = (todos) => {
+  window.localStorage.setItem('todo-list', JSON.stringify(todos))
+}
 const update = ({id, content, complated}) => {
   const todos = getTodoFromLocalStorage()
   const newTodos = todos.map(todo => {
@@ -16,14 +19,14 @@ const update = ({id, content, complated}) => {
       return todo
     }
   })
-  window.localStorage.setItem('todo-list', JSON.stringify(newTodos))
+  setTodoToLocalStorage(newTodos)
   return newTodos
 }
 
 const insert = ({content, complated}) => {
   const todos = getTodoFromLocalStorage()
   todos.push({id: uid(), content, complated})
-  window.localStorage.setItem('todo-list', JSON.stringify(todos))
+  setTodoToLocalStorage(todos)
   return todos
 }
 export default {
@@ -41,7 +44,6 @@ export default {
   saveTodo ({id, content, complated}) {
     return new Promise(resovle => {
       setTimeout(() => {
-        debugger
         if (id.startsWith('temp-')) {
           resovle({
             success: true,
@@ -62,7 +64,7 @@ export default {
       setTimeout(() => {
         const todos = getTodoFromLocalStorage()
         const newTodos = todos.filter(todo => todo.id !== id)
-        window.localStorage.setItem('todo-list', JSON.stringify(newTodos))
+        setTodoToLocalStorage(newTodos)
         resovle({
           success: true,
           result: newTodos
@@ -82,7 +84,7 @@ export default {
             return todo
           }
         })
-        window.localStorage.setItem('todo-list', JSON.stringify(newTodos))
+        setTodoToLocalStorage(newTodos)
         resovle({
           success: true,
           result: newTodos

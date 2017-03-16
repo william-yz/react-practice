@@ -3,7 +3,7 @@ import { delay } from 'redux-saga'
 
 import request from './request'
 
-function* loadTodos () {
+export function* loadTodos () {
   while (true) {
     yield take('LOAD_TODOS')
     yield put({type: 'START_LOADING'})
@@ -15,7 +15,7 @@ function* loadTodos () {
   }
 }
 
-function* saveTodo () {
+export function* saveTodo () {
   while (true) {
     const { payload: todo } = yield take('SAVE_TODO')
     yield put({type: 'START_LOADING'})
@@ -27,13 +27,13 @@ function* saveTodo () {
   }
 }
 
-function* realRemove (id, delayMs) {
+export function* realRemove (id, delayMs) {
   yield delay(delayMs)
   const {result: newTodos} = yield call(request.removeTodo, {id})
   yield put({type: 'RECEIVE_TODOS', payload: newTodos})
 }
 
-function* cancelTask (task, getState) {
+export function* cancelTask (task, getState) {
   yield take('REDO_REMOVE')
   yield cancel(task)
   const { todos } = getState()
@@ -43,7 +43,7 @@ function* cancelTask (task, getState) {
   yield put({type: 'RECEIVE_TODOS', payload: newTodos})
 }
 
-function* tempRemove (getState) {
+export function* tempRemove (getState) {
   while (true) {
     const { payload: { id } } = yield take('REMOVE_TODO')
     const { todos } = yield call(getState)
@@ -60,11 +60,11 @@ function* tempRemove (getState) {
   }
 }
 
-function* removeTodo (getState) {
+export function* removeTodo (getState) {
   yield call(tempRemove, getState)
 }
 
-function* toggleComplate () {
+export function* toggleComplate () {
   while (true) {
     const { payload: todo } = yield take('TOGGLE_COMPLATE')
     yield put({type: 'START_LOADING'})
