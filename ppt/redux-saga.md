@@ -9,18 +9,9 @@ theme: color
 ## 杨哲
 
 [slide]
-# What's redux-saga
-- 一个用于管理 Redux 应用异步操作的中间件 {:&.moveIn}
-- redux-saga 通过创建 Sagas 将所有的异步操作逻辑收集在一个地方集中处理，可以用来代替 redux-thunk 中间件
-- 基于generator
-- 易于测试
-
-[slide]
 # react/redux 的异步
 - 不用中间件(如redux-thunk)能否进行异步操作? {:&.moveIn}
-- 实现一个这样的效果[Todo-List](http://192.168.0.119:46413/saga)
- - 因为redux的action是一个普通的js对象
-
+- 实现一个这样的效果[Todo-List](http://192.168.0.119:3000/saga)
  ```javascript
     function onload (dispatch) {
         dispatch({type: START_LOADING})
@@ -30,14 +21,21 @@ theme: color
         })
     }
  ```
- - 这个控制流程需要放在component中
- - 当然你可以自己简单写一套代码,让他能方便的分离这段代码
-  * 你写出了redux-thunk {:&.moveIn}
+
 [slide]
 # react/redux 的异步
-- 引入redux-thunk
-- 让redux支持action是一个函数
+- 引入redux-thunk {:&.moveIn}
+- redux-thunk 帮助你统一了异步和同步 action 的调用方式，把异步过程放在 action 级别解决
+- 让redux支持action是一个函数,这个函数第一个参数是dispatch第二个参数是getState
 - [gitlib](http://git.ht.com/WFDEV/HongtooJetLab/tree/ASYNC-TODO-LIST/src/redux-saga)
+
+[slide]
+# What's redux-saga
+- 在 Sagas 事务模型中, 一个长事务是由一个预先定义好执行顺序的子事务集合和他们对应的补偿子事务集合组成的。子事务是按照顺序依次执行的, 当其中的某个子事务出现异常时, 就逆序执行已提交过的子事务对应的补偿事务来撤销他们的操作结果并退出。 {:&.moveIn}
+- 一个用于管理 Redux 应用异步操作的中间件
+- redux-saga 通过创建 Sagas 将所有的异步操作(effect)逻辑收集在一个地方集中处理，可以用来代替 redux-thunk 中间件
+- 基于generator
+- 易于测试
 
 [slide]
 # react/redux 的异步
