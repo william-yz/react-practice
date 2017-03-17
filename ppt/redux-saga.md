@@ -36,6 +36,8 @@ theme: color
 - redux-saga 通过创建 Sagas 将所有的异步操作(effect)逻辑收集在一个地方集中处理，可以用来代替 redux-thunk 中间件
 - 基于generator
 - 易于测试
+- 监听action/响应式(reactive)
+- 更好的选择? rxjs/redux-observable
 
 [slide]
 # react/redux 的异步
