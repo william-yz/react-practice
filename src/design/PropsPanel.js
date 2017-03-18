@@ -23,7 +23,7 @@ export default function PropsPanel({ component, updateComponent }) {
             </label>
           </div>
           <div className="mt">
-            <label>
+            <label htmlFor="temp">
               Span
               <RadioGroup id="temp2" onChange={updateComponent('span')} value={component.span}>
                 <RadioButton value={1}>1</RadioButton>
