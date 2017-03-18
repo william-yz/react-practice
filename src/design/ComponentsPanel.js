@@ -7,27 +7,30 @@ const dragstart = _.curry((type, event) => {
   event.dataTransfer.setData('type', type)
 })
 
-export default function ComponentsPanel () {
+export default function ComponentsPanel() {
   return (
     <Affix>
       <Card
         title="Components"
-        style={{height: '800px'}}
-        >
+        style={{ height: '800px' }}
+      >
         <div
           draggable="true"
-          onDragStart={dragstart('Text')}>
-          <label>
+          onDragStart={dragstart('Text')}
+        >
+          <label htmlFor="compPanelInputProp">
             Text
-            <Input 
-              disabled={true}
+            <Input
+              id="compPanelInputProp"
+              disabled
             />
           </label>
         </div>
         <div
           draggable="true"
-          onDragStart={dragstart('Button')}>
-            <Button>
+          onDragStart={dragstart('Button')}
+        >
+          <Button>
               Button
             </Button>
         </div>

@@ -2,9 +2,8 @@ import React from 'react'
 import { Input } from 'antd'
 
 
-export default function Text ({ label }) {
+export default function Text() {
   return (
-    <Input>
-    </Input>
+    <Input />
   )
 }

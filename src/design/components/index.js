@@ -3,6 +3,6 @@ import Button from './Button'
 
 export default {
   Text,
-  Button
+  Button,
 }
 

@@ -1,73 +1,65 @@
 import request from './request'
 
-export const getTodoList = () => {
-  return dispatch => {
-    dispatch({
-      type: 'START_LOADING'
-    })
-    return request.getTodoList()
-      .then(({success, result: todos}) => {
+export const getTodoList = () => (dispatch) => {
+  dispatch({
+    type: 'START_LOADING',
+  })
+  return request.getTodoList()
+      .then(({ result: todos }) => {
         dispatch({
           type: 'RECEIVE_TODOS',
-          payload: todos
+          payload: todos,
         })
         dispatch({
-          type: 'STOP_LOADING'
+          type: 'STOP_LOADING',
         })
       })
-  }
 }
 
-export const saveTodo = (todo) => {
-  return dispatch => {
-    dispatch({
-      type: 'START_LOADING'
-    })
-    return request.saveTodo(todo)
-      .then(({success, result: todos}) => {
+export const saveTodo = todo => (dispatch) => {
+  dispatch({
+    type: 'START_LOADING',
+  })
+  return request.saveTodo(todo)
+      .then(({ result: todos }) => {
         dispatch({
           type: 'RECEIVE_TODOS',
-          payload: todos
+          payload: todos,
         })
         dispatch({
-          type: 'STOP_LOADING'
+          type: 'STOP_LOADING',
         })
       })
-  }
 }
 
-export const removeTodo = (todo) => {
-  return dispatch => {
-    dispatch({
-      type: 'START_LOADING'
-    })
-    return request.removeTodo(todo)
-      .then(({success, result: todos}) => {
+export const removeTodo = todo => (dispatch) => {
+  dispatch({
+    type: 'START_LOADING',
+  })
+  return request.removeTodo(todo)
+      .then(({ result: todos }) => {
         dispatch({
           type: 'RECEIVE_TODOS',
-          payload: todos
+          payload: todos,
         })
         dispatch({
-          type: 'STOP_LOADING'
+          type: 'STOP_LOADING',
         })
       })
-  }
 }
 
-export const toggleComplate = (todo) => {
-  return dispatch => {
-    dispatch({
-      type: 'START_LOADING'
-    })
-    return request.toggleComplate(todo)
-      .then(({success, result: todos}) => {
+export const toggleComplate = todo => (dispatch) => {
+  dispatch({
+    type: 'START_LOADING',
+  })
+  return request.toggleComplate(todo)
+      .then(({ result: todos }) => {
         dispatch({
           type: 'RECEIVE_TODOS',
-          payload: todos
+          payload: todos,
         })
         dispatch({
-          type: 'STOP_LOADING'
+          type: 'STOP_LOADING',
         })
       })
-  }
 }

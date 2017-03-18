@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import './app.css'
 
-export default function App ({ children }) {
+export default function App({ children }) {
   return (
     <div>
       { children }
@@ -9,3 +9,6 @@ export default function App ({ children }) {
   )
 }
 
+App.propTypes = {
+  children: PropTypes.node,
+}

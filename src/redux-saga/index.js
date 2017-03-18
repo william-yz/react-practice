@@ -8,9 +8,9 @@ import createSagaMiddleware from 'redux-saga'
 
 import reducers from './reducers'
 import sagas from './sagas'
+import App from './App'
 
 const sagaMiddleware = createSagaMiddleware()
-import App from './App'
 
 const store = createStore(reducers,
   applyMiddleware(thunk, sagaMiddleware, createLogger()))

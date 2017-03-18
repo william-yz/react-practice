@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node scripts/start.js",
-    "test": "node scripts/test.js --env=jsdom --watchAll"
+    "test": "node scripts/test.js --env=jsdom --watchAll",
+    "fix": "eslint --fix ./src &exit 0",
+    "lint": "eslint ./src --cache --ignore-pattern .eslintignore"
   },
+  "pre-commit": ["lint"],
   "repository": {
     "type": "git",
     "url": "git@git.ht.com:WFDEV/HongtooJetLab.git"
@@ -43,13 +46,12 @@
     "css-loader": "0.26.1",
     "detect-port": "1.1.0",
     "dotenv": "2.0.0",
-    "eslint": "3.16.1",
-    "eslint-config-react-app": "^0.6.2",
-    "eslint-loader": "1.6.0",
-    "eslint-plugin-flowtype": "2.21.0",
-    "eslint-plugin-import": "2.0.1",
-    "eslint-plugin-jsx-a11y": "4.0.0",
-    "eslint-plugin-react": "6.4.1",
+    "eslint": "3.11.1",
+    "eslint-config-airbnb": "13.0.0",
+    "eslint-config-airbnb-base": "10.0.1",
+    "eslint-plugin-import": "^2.1.0",
+    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-react": "6.6.0",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.10.0",
     "fs-extra": "0.30.0",
@@ -59,6 +61,7 @@
     "json-loader": "0.5.4",
     "object-assign": "4.1.1",
     "postcss-loader": "1.2.2",
+    "pre-commit": "^1.2.2",
     "promise": "7.1.1",
     "react-dev-utils": "^0.5.2",
     "style-loader": "0.13.1",
@@ -96,8 +99,5 @@
     "presets": [
       "react-app"
     ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   }
 }

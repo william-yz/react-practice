@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Input } from 'antd'
 
 
-export default function Text ({ label }) {
+export default function Text({ label }) {
   return (
-    <label>
+    <label htmlFor="textInputId">
       {label}
-      <Input />
+      <Input id="textInputId" />
     </label>
   )
+}
+
+Text.propTypes = {
+  label: PropTypes.string.isRequired,
 }

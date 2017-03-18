@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 const style = {
   marginLeft: '10px',
   border: '1px solid black',
   width: '600px',
-  height: '750px'
+  height: '750px',
 }
 
-const SubPanel = ({ params }) => {
+export default function SubPanel({ params }) {
   return (
     <div style={style}>
       {params['index-1']}
     </div>
   )
 }
-
-export default SubPanel
+SubPanel.propTypes = {
+  params: PropTypes.shape({
+    'index-1': PropTypes.string,
+  }).isRequired,
+}
