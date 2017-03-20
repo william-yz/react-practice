@@ -8,6 +8,7 @@ import Runtime from './runtime'
 import Design from './design'
 import Saga from './redux-saga'
 import PureComponent from './purecomponent'
+import MyRedux from './my-redux'
 
 render(
   <Router history={browserHistory}>
@@ -16,6 +17,7 @@ render(
       <Route path="/design" component={Design} />
       <Route path="/saga" component={Saga} />
       <Route path="/purecomponent" component={PureComponent} />
+      <Route path="/myredux" component={MyRedux} />
     </Route>
   </Router>,
   document.getElementById('root'),
