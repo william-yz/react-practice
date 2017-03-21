@@ -9,7 +9,9 @@
     "fix": "eslint --fix ./src &exit 0",
     "lint": "eslint ./src --cache"
   },
-  "pre-commit": ["lint"],
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git@git.ht.com:WFDEV/HongtooJetLab.git"
@@ -19,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "antd": "^2.8.0",
+    "echarts": "^3.4.0",
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

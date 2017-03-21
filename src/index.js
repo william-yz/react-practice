@@ -9,6 +9,7 @@ import Design from './design'
 import Saga from './redux-saga'
 import PureComponent from './purecomponent'
 import MyRedux from './my-redux'
+import Echarts from './echarts'
 
 render(
   <Router history={browserHistory}>
@@ -18,6 +19,8 @@ render(
       <Route path="/saga" component={Saga} />
       <Route path="/purecomponent" component={PureComponent} />
       <Route path="/myredux" component={MyRedux} />
+      <Route path="/Echarts" component={Echarts} />
+
     </Route>
   </Router>,
   document.getElementById('root'),

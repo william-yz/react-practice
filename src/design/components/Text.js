@@ -6,7 +6,7 @@ export default function Text({ label }) {
   return (
     <label htmlFor="textInputId">
       {label}
-      <Input id="textInputId" />
+      <Input id="textInputId" disabled />
     </label>
   )
 }
