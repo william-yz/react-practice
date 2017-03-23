@@ -20,7 +20,6 @@
   },
   "rules": {
     "semi": ["error", "never"],
-    "react/jsx-filename-extension": "off",
     "import/no-extraneous-dependencies": "off"
   }
 }
