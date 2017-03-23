@@ -7,7 +7,8 @@
     "start": "node scripts/start.js",
     "test": "node scripts/test.js --env=jsdom --watchAll",
     "fix": "eslint --fix ./src &exit 0",
-    "lint": "eslint ./src --cache"
+    "lint": "eslint ./src --cache",
+    "coverage": "node scripts/test.js --env=jsdom --coverage --outputFile=coverage.txt"
   },
   "pre-commit": [
     "lint"
@@ -49,6 +50,7 @@
     "css-loader": "0.26.1",
     "detect-port": "1.1.0",
     "dotenv": "2.0.0",
+    "enzyme": "^2.7.1",
     "eslint": "3.11.1",
     "eslint-config-airbnb": "13.0.0",
     "eslint-config-airbnb-base": "10.0.1",
@@ -66,7 +68,9 @@
     "postcss-loader": "1.2.2",
     "pre-commit": "^1.2.2",
     "promise": "7.1.1",
+    "react-addons-test-utils": "^15.4.2",
     "react-dev-utils": "^0.5.2",
+    "react-test-renderer": "^15.4.2",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",

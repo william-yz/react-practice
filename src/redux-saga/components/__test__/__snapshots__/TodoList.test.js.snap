@@ -1,0 +1,67 @@
+exports[`test TodoList 1`] = `
+<div>
+  <ul
+    className="ant-timeline">
+    <li
+      className="ant-timeline-item ant-timeline-item-last"
+      onDoubleClick={[Function]}
+      style={
+        Object {
+          "width": "300px",
+        }
+      }>
+      <div
+        className="ant-timeline-item-tail" />
+      <div
+        className="ant-timeline-item-head ant-timeline-item-head-blue"
+        style={
+          Object {
+            "borderColor": null,
+          }
+        } />
+      <div
+        className="ant-timeline-item-content">
+        <div
+          className="editable-cell">
+          <div
+            className="editable-cell-input-wrapper">
+            <input
+              className="ant-input"
+              disabled={false}
+              onChange={[Function]}
+              onKeyDown={[Function]}
+              type="text"
+              value="test" />
+            <i
+              className="anticon anticon-check editable-cell-icon-check"
+              onClick={[Function]} />
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <span>
+    <button
+      className="ant-btn ant-btn-primary"
+      disabled={true}
+      onClick={[Function]}
+      onMouseUp={[Function]}
+      type="button">
+      <span>
+        Add
+      </span>
+    </button>
+     
+    <button
+      className="ant-btn ant-btn-primary"
+      disabled={true}
+      onClick={[Function]}
+      onMouseUp={[Function]}
+      type="button">
+      <span>
+        Redo
+      </span>
+    </button>
+  </span>
+</div>
+`;
