@@ -1,4 +1,4 @@
-'use strict';
+
 
 if (typeof Promise === 'undefined') {
   // Rejection tracking prevents a common issue where React gets into an
@@ -7,6 +7,21 @@ if (typeof Promise === 'undefined') {
   require('promise/lib/rejection-tracking').enable();
   window.Promise = require('promise/lib/es6-extensions.js');
 }
+
+// fixed jsdom miss
+if (typeof window !== 'undefined') {
+  const matchMediaPolyfill = function matchMediaPolyfill() {
+    return {
+      matches: false,
+      addListener() {
+      },
+      removeListener() {
+      },
+    };
+  };
+  window.matchMedia = window.matchMedia || matchMediaPolyfill;
+}
+
 
 // fetch() polyfill for making API calls.
 require('whatwg-fetch');

@@ -10,7 +10,8 @@ const style = {
   width: '300px',
 }
 
-class TodoList extends React.Component {
+const TimelineItem = Timeline.Item
+export class TodoListComponent extends React.Component {
   componentDidMount = () => {
     this.props.dispatch({ type: 'LOAD_TODOS' })
   }
@@ -24,6 +25,7 @@ class TodoList extends React.Component {
       payload: todo,
     })
   }
+
   removeTodo = todo => () => {
     this.props.dispatch({ type: 'REMOVE_TODO', payload: todo })
   }
@@ -57,7 +59,7 @@ class TodoList extends React.Component {
       <div>
         <Timeline>
           {this.props.todos.filter(todo => !todo.deleted).map(todo => (
-            <Timeline.Item
+            <TimelineItem
               key={todo.id}
               style={style}
               color={todo.complated ? 'green' : 'blue'}
@@ -71,7 +73,7 @@ class TodoList extends React.Component {
                 edit={this.edit(todo)}
                 removeTodo={this.removeTodo(todo)}
               />
-            </Timeline.Item>
+            </TimelineItem>
             ))}
         </Timeline>
         <Actions
@@ -85,15 +87,15 @@ class TodoList extends React.Component {
   }
 }
 
-const mapStateToProps = ({ todos }) => ({
+export const mapStateToProps = ({ todos }) => ({
   todos,
   someoneIsEditting: todos.some(todo => todo.editting),
 })
 
 
-export default connect(mapStateToProps)(TodoList)
+export default connect(mapStateToProps)(TodoListComponent)
 
-TodoList.propTypes = {
+TodoListComponent.propTypes = {
   dispatch: PropTypes.func.isRequired,
   todos: PropTypes.arrayOf(PropTypes.object).isRequired,
   someoneIsEditting: PropTypes.bool.isRequired,

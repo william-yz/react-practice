@@ -1,0 +1,103 @@
+exports[`test Actions case 1 1`] = `
+<span>
+  <button
+    className="ant-btn ant-btn-primary"
+    disabled={true}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      Add
+    </span>
+  </button>
+   
+  <button
+    className="ant-btn ant-btn-primary"
+    disabled={true}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      Redo
+    </span>
+  </button>
+</span>
+`;
+
+exports[`test Actions case 2 1`] = `
+<span>
+  <button
+    className="ant-btn ant-btn-primary"
+    disabled={true}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      Add
+    </span>
+  </button>
+   
+  <button
+    className="ant-btn ant-btn-primary"
+    disabled={true}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      Redo
+    </span>
+  </button>
+</span>
+`;
+
+exports[`test Actions case 3 1`] = `
+<span>
+  <button
+    className="ant-btn ant-btn-primary"
+    disabled={false}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      Add
+    </span>
+  </button>
+   
+  <button
+    className="ant-btn ant-btn-primary"
+    disabled={false}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      Redo
+    </span>
+  </button>
+</span>
+`;
+
+exports[`test Actions case 4 1`] = `
+<span>
+  <button
+    className="ant-btn ant-btn-primary"
+    disabled={false}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      Add
+    </span>
+  </button>
+   
+  <button
+    className="ant-btn ant-btn-primary"
+    disabled={true}
+    onClick={[Function]}
+    onMouseUp={[Function]}
+    type="button">
+    <span>
+      Redo
+    </span>
+  </button>
+</span>
+`;

@@ -1,7 +1,7 @@
 import { put, call, take } from 'redux-saga/effects'
-import { loadTodos } from './sagas'
+import { loadTodos } from '../sagas'
 
-import request from './request'
+import request from '../request'
 
 test('loadTodos', () => {
   const interator = loadTodos()

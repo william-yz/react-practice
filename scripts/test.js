@@ -1,6 +1,8 @@
 'use strict';
 
-process.env.NODE_ENV = 'test';
+
+// FIXME: change it to 'test' after upgrade antd
+process.env.NODE_ENV = 'production';
 process.env.PUBLIC_URL = '';
 
 // Load environment variables from .env file. Suppress warnings using silent

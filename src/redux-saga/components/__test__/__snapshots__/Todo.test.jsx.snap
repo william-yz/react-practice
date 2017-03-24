@@ -1,0 +1,56 @@
+exports[`test Todo case 1 1`] = `
+<div
+  className="editable-cell">
+  <div
+    className="editable-cell-input-wrapper">
+    <input
+      className="ant-input"
+      disabled={false}
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      type="text"
+      value="abcd" />
+    <i
+      className="anticon anticon-check editable-cell-icon-check"
+      onClick={[Function]} />
+  </div>
+</div>
+`;
+
+exports[`test Todo case 2 1`] = `
+<div
+  className="editable-cell">
+  <div
+    className="editable-cell-input-wrapper"
+    style={
+      Object {
+        "textDecoration": "none",
+      }
+    }>
+    abcd
+    <span>
+      <i
+        className="anticon anticon-edit editable-cell-icon"
+        onClick={[Function]} />
+      <i
+        className="anticon anticon-delete delete-cell-icon"
+        onClick={[Function]} />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`test Todo case 3 1`] = `
+<div
+  className="editable-cell">
+  <div
+    className="editable-cell-input-wrapper"
+    style={
+      Object {
+        "textDecoration": "line-through",
+      }
+    }>
+    abcd
+  </div>
+</div>
+`;
